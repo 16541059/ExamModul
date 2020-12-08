@@ -20,17 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="825abd15-4483-4329-976a-9ea18b19c06d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/students/exams.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/students/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/students/questions.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deneme.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/gapFilling.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/gapFilling.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/openCloze.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/openCloze.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/process.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/process.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/trueFalse.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/trueFalse.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/students/exams.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/students/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/students/index.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +38,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -69,6 +63,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -129,7 +124,7 @@
       <workItem from="1607005457347" duration="377000" />
       <workItem from="1607065823564" duration="16131000" />
       <workItem from="1607324113477" duration="14939000" />
-      <workItem from="1607421930382" duration="11113000" />
+      <workItem from="1607421930382" duration="12896000" />
     </task>
     <servers />
   </component>
