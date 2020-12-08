@@ -10,7 +10,10 @@ startTime= ?,
 endTime= ?,examName= ?,maxMark= ?,maxEntry= ?,maxTime= ?,activation= ?");
 $multipleSql = $conn->prepare("INSERT INTO questionTable SET examId=?, question= ?, 	trueQuestion= ?,
 falseQuestion1=? ,falseQuestion2= ?,falseQuestion3= ?,falseQuestion4= ? ");
-$trueFalseSql = $conn->prepare("INSERT INTO questionTable SET examId=?, question= ?, trueFalse=? ")
+$trueFalseSql = $conn->prepare("INSERT INTO questionTable SET examId=?, question= ?, trueFalse=? ");
+$gapFillingSql = $conn->prepare("INSERT INTO questionTable SET examId=?, question= ?, answer=? ");
+$openClozeSql = $conn->prepare("INSERT INTO questionTable SET examId=?, question= ? ");
+
 ?>
 <?php
 //Exam Add Part
@@ -128,4 +131,69 @@ if(isset($_POST["addTrueFalse"])){
     }
 
 }
+if(isset($_POST["addGapFilling"])){
+    class saveGapFilling{
+        public $examid;
+        public $question;
+        public $answer;
+
+        public function __construct()
+        {
+            $this->examid=$_POST["examid"];
+            $this->question=$_POST["question"];
+            $this->answer=$_POST["answer"];
+        }
+
+    }
+    $saveGapFillingClass= new saveGapFilling();
+
+    try {
+        $insert=$gapFillingSql->execute(array($saveGapFillingClass->examid,$saveGapFillingClass->question,$saveGapFillingClass->answer));
+        if($insert){
+            header('Location: index.php?radioValue='.$saveGapFillingClass->examid);
+        }
+    }catch (Exception $e){
+        echo $e->getMessage();
+    }
+
+}
+// add Open Cloze
+if(isset($_POST["addOpenCloze"])){
+    class saveOpenCloze{
+        public $examid;
+        public $question;
+
+
+        public function __construct()
+        {
+            $this->examid=$_POST["examid"];
+            $this->question=$_POST["question"];
+
+        }
+
+    }
+    $saveOpenClozeClass= new saveOpenCloze();
+
+    try {
+        $insert=$openClozeSql->execute(array($saveOpenClozeClass->examid,$saveOpenClozeClass->question));
+        if($insert){
+            header('Location: index.php?radioValue='.$saveOpenClozeClass->examid);
+        }
+    }catch (Exception $e){
+        echo $e->getMessage();
+    }
+
+}
+
+//Remove Question
+if(isset($_POST["questionid"])){
+
+    $query =$conn->prepare("DELETE FROM questionTable WHERE İndex= :id");
+    $delete=$query->execute(array(
+        "id"=>$_POST['questionid']
+    ));
+
+}
+
+
 ?>

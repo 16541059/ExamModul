@@ -32,7 +32,7 @@
 
                     <div  class="row" style="background-color:#0fe424;color:white;">
                         <div class="col-md-2">
-                            <label class="d-flex justify-content-end">SORU</label>
+                            <label class="d-flex justify-content-end">SORU </label>
                         </div>
                         <div class="col-md-10">
                             <input type="text" name="examid" value="<?php echo $_GET["id"]?>" hidden >

@@ -117,15 +117,15 @@ $questionSort= $questionSql->fetchAll();
 
                         <?php  $i=$i+1;?>
                     <div  class="card text-white bg-dark mb-3">
-                        <div id="<?php echo $i?>"  class="card-header">
-                            Soru <?php echo $i;?>
+                        <div id="card-<?php echo $i?>"  class="card-header">
+                            Soru <?php echo $i;?> <span id="<?php echo $i?>" class="badge badge-info slidequestion"> <i id="angle-up-<?php echo $i?>" class="fas fa-angle-down"></i></span>
                             <div class="col-md-2 float-right">
-                                <button  type="submit" class="btn btn-success  fas fa-bars"></button>
-                                <button  id="<?php echo $row["examId"] ?>" style="margin-left: 1em"  type="submit" class="btn btn-danger far fa-trash-alt "></button>
+                                <button card-header type="submit" class="btn btn-success  fas fa-bars"></button>
+                                <button id="<?php echo $row["index"];?>"  card-header style="margin-left: 1em"  type="submit" class="btn btn-danger far fa-trash-alt deletequestion "></button>
                             </div>
 
                         </div>
-                        <div id="exam-<?php echo $i ?>"  class="card-body">
+                        <div id="exam-<?php echo $i ?>"  class="card-body" style="display: none">
                             <?php if(isset($row["trueQuestion"])): ?>
                                 <div style="background-color: grey; margin-bottom:10px;" class="row">
                                     <div class="col-md-1">
@@ -197,6 +197,37 @@ $questionSort= $questionSql->fetchAll();
                                 </div>
 
                             <?php endif;?>
+                            <?php if(isset($row["answer"])): ?>
+                                <div style="background-color: grey; margin-bottom: 10px" class="row">
+                                    <div class="col-md-1">
+                                        <span >Soru:</span>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <span ><?php echo $row["question"]?></span>
+                                    </div>
+                                </div>
+                                <div style=" background-color:green; margin-bottom: 10px" class="row">
+                                    <div style="background-color: grey" class="col-md-1">
+                                        <span >Cevap:</span>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <span ><?php echo $row["answer"]?></span>
+                                    </div>
+                                </div>
+
+                            <?php endif;?>
+                            <?php if(!isset($row["answer"]) and !isset($row["trueQuestion"]) and !isset($row["trueFalse"])): ?>
+                                <div style="background-color: grey; margin-bottom: 10px" class="row">
+                                    <div class="col-md-1">
+                                        <span >Soru:</span>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <span ><?php echo $row["question"]?></span>
+                                    </div>
+                                </div>
+
+
+                            <?php endif;?>
 
 
                         </div>
@@ -208,64 +239,6 @@ $questionSort= $questionSql->fetchAll();
             </div>
         </div>
 
-     <!--   <div class="row ">
-            <div class="col mr-5">
-                <table class="table table-borderless table-dark">
-                    <thead>
-                    <tr>
-
-
-                        <th scope="col">Ders Kodu</th>
-                        <th scope="col"> Soru</th>
-                        <th scope="col">Doğru Cevap</th>
-                        <th scope="col">Yanlış Cevap</th>
-                        <th scope="col">Yanlış Cevap</th>
-                        <th scope="col">Yanlış Cevap</th>
-                        <th scope="col">Yanlış Cevap</th>
-                        <th scope="col">Doğru Yanlış</th>
-                        <th scope="col">Boşluk Doldurma</th>
-                        <th scope="col">Düzenle</th>
-
-
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php /*if($examTable->rowCount()):*/?>
-                        <?php /*foreach ($questionSort as $row ):*/?>
-
-                            <tr id="exam-<?php /*echo $row["examId"] */?>" class="table">
-                                <div  class="card text-white bg-dark mb-3">
-                                    <div  class="card-header">
-                                        Featured
-                                    </div>
-                                    <div class="card-body">
-                                        <h5 class="card-title">Special title treatment</h5>
-                                       <p> <?php /*echo $row["question"]*/?></p>
-
-                                    </div>
-                                </div>
-                                <th scope="row"><?php /*echo $row["examId"]*/?> </th>
-                                <td><?php /*echo $row["question"]*/?></td>
-                                <td><?php /*echo $row["trueQuestion"]*/?></td>
-                                <td><?php /*echo $row["falseQuestion1"]*/?></td>
-                                <td><?php /*echo $row["falseQuestion2"]*/?></td>
-                                <td><?php /*echo $row["falseQuestion3"]*/?></td>
-                                <td><?php /*echo $row["falseQuestion4"]*/?></td>
-                                <td><?php /*echo $row["true/false "] */?></td>
-                                <td><?php /*echo $row["answer "] */?></td>
-                                <td>
-                                    <button id="editExam" type="submit" class="btn btn-success"><i class="fas fa-bars"></i></button>
-                                    <button  id="<?php /*echo $row["examId"] */?>" type="submit" class="btn btn-danger far fa-trash-alt "></button>
-                                </td>
-                                    <?php /*$questionId= $row["examId"]*/?>
-                            </tr>
-                        <?php /*endforeach;*/?>
-                    <?php /*endif;*/?>
-                    </tbody>
-                </table>
-
-            </div>
-        </div>-->
 
 
         <!-- The Modal -->
@@ -384,47 +357,6 @@ $questionSort= $questionSql->fetchAll();
 <script src="../air-datepicker-master/dist/js/i18n/datepicker.tr.js"></script>
 
 <script src="index.js"></script>
-<script>
-
-
-
-
-</script>
-<style>
-    /* Style the input container */
-    .input-container {
-        display: flex;
-        width: 100%;
-        margin-bottom: 15px;
-    }
-
-    /* Style the form icons */
-    .icon {
-        padding: 10px;
-        background: dodgerblue;
-        color: white;
-        min-width: 50px;
-        text-align: center;
-    }
-
-    /* Style the input fields */
-    .input-field {
-        width: 100%;
-        padding: 10px;
-        outline: none;
-    }
-
-    .input-field:focus {
-        border: 2px solid dodgerblue;
-    }
-
-    /* Set a style for the submit button */
-tbody tr:hover{
-    background-color: grey;
-
-    cursor:pointer;
-}
-</style>
 </html>
 <?php
 function base_url() {

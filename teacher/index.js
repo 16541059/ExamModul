@@ -54,10 +54,10 @@ $("#addQuestion").click(function () {
             $(location).attr('href', '/php/teacher/trueFalse.php?id='+examid);
             break;
         case "gapFilling":
-            $(location).attr('href', '/php/teacher/gapFilling.php');
+            $(location).attr('href', '/php/teacher/gapFilling.php?id='+examid);
             break;
         case"openCloze":
-            $(location).attr('href', '/php/teacher/openCloze.php');
+            $(location).attr('href', '/php/teacher/openCloze.php?id='+examid);
             break;
         default:
         // code block
@@ -167,7 +167,42 @@ $("tr").click(function (e) {
 
 
 
-$(".card-header").click(function (){
+$(".slidequestion").click(function (){
 var id=    $(this).attr("id");
 $("#exam-"+id).toggle("slow");
+ $("#angle-up-"+id).toggleClass("fa-angle-up",3000);
+
+});
+
+$(".deletequestion").click(function () {
+    var questionid = $(this).attr("id");
+    $.ajax({
+        type:"POST",
+        url:"process.php",
+        data:'questionid='+questionid,
+        success:function (msg){
+
+            console.log(questionid);
+
+        },
+        error:function (){
+            console.log("erorr");
+        }
+    });
+    $(this).parents(".card").remove();
+});
+
+
+
+
+$('.scrollup').click(function () {
+
+    $("html, body").animate({
+
+        scrollTop: 0
+
+    }, 600);
+
+    return false;
+
 });

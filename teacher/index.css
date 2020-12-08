@@ -67,6 +67,13 @@ body{
     cursor: pointer;
 }
 
+tbody tr:hover{
+    background-color: grey;
+
+    cursor:pointer;
+}
+
+
 @media only screen and (max-width: 770px) {
 
     .questionBar button{
@@ -106,6 +113,8 @@ body{
     #previewBtn{
         width: 120px;
     }
+
+
 }
 /* Style the input container */
 .input-container {
@@ -205,4 +214,3 @@ body{
 }
 
 * {box-sizing: border-box;}
-

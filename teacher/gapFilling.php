@@ -22,18 +22,19 @@
                             <label class="d-flex justify-content-end">SORU TÜRÜ</label>
                         </div>
                         <div class="col-md-10">
-                            <input class="form-control" placeholder="BOŞLUK DOLDURMA" readonly type="text">
+                            <input class="form-control" placeholder="BOŞLUK DOLDURMA <?php echo $_GET["id"]?>" readonly type="text">
                         </div>
                     </div>
 
                 </div>
-                <form method="POST" class="form-group ">
+                <form method="POST" action="process.php" class="form-group ">
 
                     <div  class="row" style="background-color:#0fe424;color:white;">
                         <div class="col-md-2">
                             <label class="d-flex justify-content-end">SORU</label>
                         </div>
                         <div class="col-md-10">
+                            <input type="text" name="examid" value="<?php echo $_GET["id"]?>" hidden >
                             <textarea class="form-control" name="question"></textarea>
                         </div>
                     </div>
@@ -42,7 +43,7 @@
                             <label class="d-flex justify-content-end">CEVAP</label>
                         </div>
                         <div class="col-md-10" >
-                            <input class="form-control" placeholder=""  type="text">
+                            <input class="form-control" name="answer" placeholder=""  type="text">
                         </div>
                     </div>
                     <div class="row" style="margin-top: 8px;">
@@ -64,7 +65,7 @@
                         <div class="col-md-3">
                             <div class="d-flex justify-content-end" style="margin-left: 5px">
                                 <button id="recantBtn" type="reset" class="btn btn-danger"><i class="fas fa-window-close"></i> VAZGEÇ</button>
-                                <button id="saveBtn" class=" btn btn-success ">  <i class="fas fa-plus"></i> KAYDET</button>
+                                <button id="saveBtn" class=" btn btn-success " name="addGapFilling" >   <i class="fas fa-plus"></i> KAYDET</button>
                             </div>
 
                         </div>
@@ -92,5 +93,6 @@
 
     CKEDITOR.config.height = '10em';
     CKEDITOR.config.defaultLanguage = 'tr';
-    question.config.uiColor="#0fe424"
+    question.config.uiColor="#0fe424";
+    CKEDITOR.config.autoParagraph = false;
 </script>
