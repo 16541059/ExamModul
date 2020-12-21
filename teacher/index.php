@@ -10,7 +10,6 @@ $questionSql->bindParam(":examId",$radio);
 $questionSql->execute();
 $questionSort= $questionSql->fetchAll();
 
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -62,7 +61,6 @@ $questionSort= $questionSql->fetchAll();
                         <th scope="col">Sınav Süresi</th>
                         <th scope="col">Sınav Durumu</th>
                         <th scope="col">Seç</th>
-
                     </tr>
                     </thead>
                     <tbody>
@@ -80,24 +78,16 @@ $questionSort= $questionSql->fetchAll();
                         <td><?php echo $row["maxTime"]?></td>
                         <td><?php echo $row["activation"] ?  "Aktif":"Pasif"; ?></td>
                         <td>
-
                             <button id="editExam" type="submit" class="btn btn-success"><i class="fas fa-bars"></i></button>
                             <button  id="<?php echo $row["examId"] ?>" type="submit" class="btn btn-danger far fa-trash-alt deleteExam "></button>
-
                         </td>
-
                     </tr>
-
                     <?php endforeach;?>
                     <?php endif;?>
                     </tbody>
                 </table>
-
             </div>
         </div>
-
-
-
             <div class="row questionBar">
                 <div class="col-md-4">
                     <h6>SORULAR</h6>
@@ -127,6 +117,7 @@ $questionSort= $questionSql->fetchAll();
                         </div>
                         <div id="exam-<?php echo $i ?>"  class="card-body" style="display: none">
                             <?php if(isset($row["trueQuestion"])): ?>
+                                <img style="max-width: 100%" src="<?php echo $row["image"]?>" alt="">
                                 <div style="background-color: grey; margin-bottom:10px;" class="row">
                                     <div class="col-md-1">
                                         <span >Soru:</span>
@@ -179,6 +170,7 @@ $questionSort= $questionSql->fetchAll();
                             <?php endif;?>
 
                             <?php if(isset($row["trueFalse"])): ?>
+                                <img style="max-width: 100%" src="<?php echo $row["image"]?>" alt="">
                                 <div style="background-color: grey; margin-bottom: 10px" class="row">
                                     <div class="col-md-1">
                                         <span >Soru:</span>
@@ -198,7 +190,9 @@ $questionSort= $questionSql->fetchAll();
 
                             <?php endif;?>
                             <?php if(isset($row["answer"])): ?>
+                                <img style="max-width: 100%" src="<?php echo $row["image"]?>" alt="">
                                 <div style="background-color: grey; margin-bottom: 10px" class="row">
+
                                     <div class="col-md-1">
                                         <span >Soru:</span>
                                     </div>
@@ -214,9 +208,9 @@ $questionSort= $questionSql->fetchAll();
                                         <span ><?php echo $row["answer"]?></span>
                                     </div>
                                 </div>
-
                             <?php endif;?>
                             <?php if(!isset($row["answer"]) and !isset($row["trueQuestion"]) and !isset($row["trueFalse"])): ?>
+                                <img style="max-width: 100%" src="<?php echo $row["image"]?>" alt="">
                                 <div style="background-color: grey; margin-bottom: 10px" class="row">
                                     <div class="col-md-1">
                                         <span >Soru:</span>
@@ -225,11 +219,7 @@ $questionSort= $questionSql->fetchAll();
                                         <span ><?php echo $row["question"]?></span>
                                     </div>
                                 </div>
-
-
                             <?php endif;?>
-
-
                         </div>
                     </div>
 

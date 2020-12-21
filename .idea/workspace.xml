@@ -20,10 +20,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="825abd15-4483-4329-976a-9ea18b19c06d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/students/questions.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/students/process.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/students/questionRandom.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teacher/image.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teacher/image/5fd8ac7b2dea8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teacher/image/5fd8b0f6eeee1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teacher/image/5fd8b707edb66.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teacher/image/5fd8c235b032d.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teacher/image/5fd8c43717abe.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teacher/sorular.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teacher/sorular.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/students/exams.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/students/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/students/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/students/questions.php" beforeDir="false" afterPath="$PROJECT_DIR$/students/questions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/gapFilling.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/gapFilling.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/addPdf.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/multipleChoice.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/multipleChoice.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/openCloze.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/openCloze.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/process.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/process.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/trueFalse.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/trueFalse.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,17 +82,24 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/teacher" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/teacher" />
+      <recent name="$PROJECT_DIR$/teacher/image" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/teacher" />
       <recent name="$PROJECT_DIR$" />
@@ -124,7 +148,25 @@
       <workItem from="1607005457347" duration="377000" />
       <workItem from="1607065823564" duration="16131000" />
       <workItem from="1607324113477" duration="14939000" />
-      <workItem from="1607421930382" duration="12896000" />
+      <workItem from="1607421930382" duration="13493000" />
+      <workItem from="1607446440408" duration="3440000" />
+      <workItem from="1607499274295" duration="4429000" />
+      <workItem from="1607508445281" duration="13154000" />
+      <workItem from="1607586058187" duration="8708000" />
+      <workItem from="1607669466196" duration="9896000" />
+      <workItem from="1607685273053" duration="8059000" />
+      <workItem from="1607859718144" duration="5271000" />
+      <workItem from="1607885827581" duration="1156000" />
+      <workItem from="1607927812664" duration="916000" />
+      <workItem from="1607935293420" duration="599000" />
+      <workItem from="1607939328728" duration="9181000" />
+      <workItem from="1607952492754" duration="4561000" />
+      <workItem from="1608019354675" duration="18564000" />
+      <workItem from="1608101810675" duration="11968000" />
+      <workItem from="1608188889042" duration="21885000" />
+      <workItem from="1608275624194" duration="12296000" />
+      <workItem from="1608381831868" duration="12000" />
+      <workItem from="1608402835050" duration="2927000" />
     </task>
     <servers />
   </component>

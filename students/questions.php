@@ -2,34 +2,22 @@
 <?php include '../teacher/connect.php';?>
 
 <?php
-if(isset($_GET["examid"])){
-    $_SESSION["examid"]= $_GET["examid"];
-}
-if(isset($_POST["examid"])){
-    $_SESSION["examid"]= $_POST["examid"];
-}
-
-
-$questionSql = $conn->prepare("SELECT * FROM questionTable WHERE examId  = :examid ORDER BY question DESC ");
-$questionSql->bindParam(":examid",  $_SESSION["examid"] );
-$questionSql->execute();
-$questionSort = $questionSql->fetchAll();
+$questionSort= $_SESSION["quest"];
 ?>
 <?php
-$i=0;
+
 if(isset($_POST["next"])){
 
-    $_SESSION["question"]= $_SESSION["question"]+ $_POST["next"];
-    $i= $_SESSION["question"];
+
+        $_SESSION["question"]= $_SESSION["question"]+ $_POST["next"];
+
+
 
 }
-if(isset($_POST["previous"])){
-    if($_SESSION["question"]>0){
-        $_SESSION["question"]= $_SESSION["question"]- $_POST["previous"];
-        $i= $_SESSION["question"];
-    }
 
-}
+
+
+echo $i= $_SESSION["question"]-1;
 ?>
 <!doctype html>
 <html lang="en">
@@ -46,17 +34,21 @@ if(isset($_POST["previous"])){
     <link rel="stylesheet" href="../teacher/index.css">
 </head>
 <body>
+
 <div class="container mb-5">
     <div class="row">
         <div class="card" style="width:98%">
             <div class="card-header">
                 Soru <?php echo $i+1?>
             </div>
-            <div class="card-body">
+            <div class="card-body" >
+
                 <?php if(isset($questionSort[$i]["trueQuestion"])): ?>
+
+                    <img  style="max-width:100%" src="<?php echo $questionSort[ $i ]["image"]?>" alt="">
                     <h3>Soru: <?php echo $questionSort[ $i ]["question"]?></h3>
 
-                    <div class="col-md-10">
+
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="<?php echo $questionSort[ $i ]["trueQuestion"]?>" >
                             <label class="form-check-label" for="exampleRadios1">
@@ -75,6 +67,7 @@ if(isset($_POST["previous"])){
                                 C: <?php echo $questionSort[ $i ]["falseQuestion2"]?>
                             </label>
                         </div>
+
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios4" value="<?php echo $questionSort[ $i ]["falseQuestion3"]?>" >
                             <label class="form-check-label" for="exampleRadios4">
@@ -88,10 +81,11 @@ if(isset($_POST["previous"])){
                                 E: <?php echo $questionSort[ $i ]["falseQuestion4"]?>
                             </label>
                         </div>
-                    </div>
+
                 <?php endif;?>
 
                 <?php if(isset($questionSort[$i]["trueFalse"])):?>
+                    <img  style="max-width:100%" src="<?php echo $questionSort[ $i ]["image"]?>" alt="">
                     <h3>Soru: <?php echo $questionSort[ $i ]["question"]?></h3>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value=1 >
@@ -108,6 +102,7 @@ if(isset($_POST["previous"])){
                     </div>
                 <?php endif; ?>
                 <?php if(isset($questionSort[$i]["answer"])):?>
+                    <img  style="max-width:100%" src="<?php echo $questionSort[ $i ]["image"]?>" alt="">
                     <h3>Soru: <?php echo $questionSort[ $i ]["question"]?></h3>
                     <hr>
                     <br>
@@ -116,10 +111,12 @@ if(isset($_POST["previous"])){
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">Cevap:</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                        <input type="text" class="form-control" name="gapFilling" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
                     </div>
                 <?php endif;?>
                 <?php if(!isset($questionSort[$i]["answer"]) and !isset($questionSort[$i]["trueQuestion"]) and !isset($questionSort[$i]["trueFalse"])): ?>
+                    <img  style="max-width:100%" src="<?php echo $questionSort[ $i ]["image"]?>" alt="">
+                    <br>
                     <h3>Soru: <?php echo $questionSort[ $i ]["question"]?></h3>
                     <hr>
                     <br>
@@ -128,11 +125,11 @@ if(isset($_POST["previous"])){
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">Cevap:</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                        <input type="text" name="openCloze" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
                     </div>
                 <?php endif; ?>
-
             </div>
+
         </div>
     </div>
 </div>
@@ -142,11 +139,11 @@ if(isset($_POST["previous"])){
         <div class="col-md-2">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
-                    <form action="questions.php" method="POST">
-                        <input hidden value=1  name="previous" type="text">
+
+
                         <input type="text" hidden name="examid" value="<?php echo $_SESSION["examid"]?>">
-                        <li class="page-item" ><button class="page-link" type="submit"> Önceki Soru <i  class="fas fa-arrow-left"></i> </button></li>
-                    </form>
+                        <li class="page-item" ><button id="previousBtn" class="page-link" type="submit"> Önceki Soru <i  class="fas fa-arrow-left"></i> </button></li>
+
 
                 </ul>
             </nav>
@@ -156,15 +153,15 @@ if(isset($_POST["previous"])){
             <div class="">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination center">
-                        <?php if($i<count($questionSort)-1):?>
-                            <form action="questions.php" method="POST">
-                                <input hidden value=1 name="next" type="text">
-                                <input type="text" hidden name="examid" value="<?php echo $_SESSION["examid"]?>">
-                                <li class="page-item" ><button class="page-link" type="submit"> Sonraki Soru <i class="fas fa-arrow-right "></i> </button></li>
-                            </form>
+                        <?php if($i <count($questionSort)):?>
+
+
+
+                                <li class="page-item" ><button id="nextButton" value="<?php echo $questionSort[$i]["index"]?>" class="page-link" type="submit"> Sonraki Soru <i class="fas fa-arrow-right "></i> </button></li>
+
                         <?php else:?>
                             <form action="index.php" method="POST">
-                                <li class="page-item" ><button name="finishExam" class="page-link" type="submit"> Sınavı Bitir <i class="fas fa-arrow-right "></i> </button></li>
+                                <li class="page-item" ><button name="finishExam"  class="page-link" type="submit"> Sınavı Bitir <i class="fas fa-arrow-right "></i> </button></li>
                             </form>
 
                         <?php endif; ?>
@@ -176,7 +173,8 @@ if(isset($_POST["previous"])){
     </div>
 </div>
 
-
+<input type="text" hidden name="examId" value="<?php echo $_SESSION["examid"]?>">
+<input type="text" name="point" value="<?php echo  $_SESSION["point"]?>" hidden>
 </body>
 
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -221,6 +219,110 @@ if(isset($_POST["previous"])){
         .change(function(){
             if( $(this).is(":checked") ){
                 var val = $(this).val();
-                console.log(val);
+
+
             }
         });
+
+
+    $("#nextButton").click(function (e){
+        var radioValue = $("input[type='radio']:checked").val();
+        var examId= $("input[name='examId']").val();
+        var index= $("button[id='nextButton']").val();
+        var gapValue= $("input[name='gapFilling']").val();
+        var openValue= $("input[name='openCloze']").val();
+        var point=$("input[name='point']").val();
+       if(radioValue){
+           $.ajax({
+               type:"POST",
+               url:"process.php",
+               data:{'radioValue':radioValue,'examId':examId,'point':point,'index':index},
+               success:function (){
+
+                   console.log('%c success', 'background: black; color: green');
+
+
+               },
+               error:function (){
+                   console.log('%c error', 'background: black; color: red');
+
+
+               }
+           });
+
+       }
+
+      if(gapValue){
+            $.ajax({
+                type:"POST",
+                url:"process.php",
+                data:{'gapValue':gapValue,'examId':examId,'point':point,'index':index},
+                success:function (msg){
+
+                    console.log('%c success', 'background: black; color: green');
+
+
+                },
+                error:function (){
+                    console.log('%c error', 'background: black; color: red');
+                }
+            });
+        }
+        if(openValue){
+            $.ajax({
+                type:"POST",
+                url:"process.php",
+                data:{'openValue':openValue,'examId':examId,'point':point,'index':index},
+                success:function (msg){
+
+                    console.log('%c success', 'background: black; color: green');
+
+
+                },
+                error:function (){
+                    console.log('%c error', 'background: black; color: red');
+                }
+            });
+        }
+
+        $.ajax({
+            type:"POST",
+            url:"questions.php",
+            data:{'next':1},
+            success:function (msg){
+
+                console.log('%c success', 'background: black; color: green');
+                location.reload();
+
+
+
+            },
+            error:function (msg){
+                console.log('%c error', 'background: black; color: red');
+
+
+            }
+        });
+    });
+
+    $("#previousBtn").click(function () {
+        $.ajax({
+            type:"POST",
+            url:"questions.php",
+            data:{'next':-1},
+            success:function (msg){
+
+                console.log('%c success', 'background: black; color: green');
+                location.reload();
+
+
+
+            },
+            error:function (msg){
+                console.log('%c error', 'background: black; color: red');
+
+
+            }
+        });
+    });
+</script>

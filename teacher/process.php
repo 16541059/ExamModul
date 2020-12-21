@@ -8,14 +8,28 @@ $query = $conn->prepare("INSERT INTO examTable SET
 examId = ?,
 startTime= ?,
 endTime= ?,examName= ?,maxMark= ?,maxEntry= ?,maxTime= ?,activation= ?");
+
 $multipleSql = $conn->prepare("INSERT INTO questionTable SET examId=?, question= ?, 	trueQuestion= ?,
-falseQuestion1=? ,falseQuestion2= ?,falseQuestion3= ?,falseQuestion4= ? ");
-$trueFalseSql = $conn->prepare("INSERT INTO questionTable SET examId=?, question= ?, trueFalse=? ");
-$gapFillingSql = $conn->prepare("INSERT INTO questionTable SET examId=?, question= ?, answer=? ");
-$openClozeSql = $conn->prepare("INSERT INTO questionTable SET examId=?, question= ? ");
+falseQuestion1=? ,falseQuestion2= ?,falseQuestion3= ?,falseQuestion4= ?,image=? ");
+$trueFalseSql = $conn->prepare("INSERT INTO questionTable SET examId=?, question= ?, trueFalse=?,image=? ");
+$gapFillingSql = $conn->prepare("INSERT INTO questionTable SET examId=?, question= ?, answer=?,image=? ");
+$openClozeSql = $conn->prepare("INSERT INTO questionTable SET examId=?, question= ?,image=? ");
 
 ?>
 <?php
+
+ class main{
+     public function addimage(){
+
+         @$tmp_name=$_FILES["file"]["tmp_name"];
+         @$name=$_FILES["file"]["name"];
+         $benzersizad=uniqid();
+         (move_uploaded_file(@$tmp_name,"/var/www/html/php/teacher/image/" . $benzersizad.".png"));
+         return "../teacher/image/" . $benzersizad.".png";
+
+     }
+
+}
 //Exam Add Part
 if(isset($_POST["addExam"])){
 
@@ -67,7 +81,7 @@ if($_POST["id"]){
 
 //MulitpleChoice Add Question
 if(isset($_POST["saveQuestionMultiple"])){
-    class saveMultiple{
+    class saveMultiple extends main {
         public $examid;
         public $question;
         public $trueQuestion;
@@ -75,6 +89,7 @@ if(isset($_POST["saveQuestionMultiple"])){
         public $falseQuestion2;
         public $falseQuestion3;
         public $falseQuestion4;
+        public $image;
         public function __construct()
         {
             $this->examid=$_POST["examid"];
@@ -84,15 +99,16 @@ if(isset($_POST["saveQuestionMultiple"])){
             $this->falseQuestion2=$_POST["falseQuestion2"];
             $this->falseQuestion3=$_POST["falseQuestion3"];
             $this->falseQuestion4=$_POST["falseQuestion4"];
+            $this->image=$_FILES["image"]["name"];
         }
-        public function test() {
-            get_object_vars($this);
-        }
+
+
     }
     $saveMultipleClass= new saveMultiple();
+
  try {
         $insert=$multipleSql->execute(array($saveMultipleClass->examid,$saveMultipleClass->question,$saveMultipleClass->trueQuestion,
-            $saveMultipleClass->falseQuestion1,$saveMultipleClass->falseQuestion2,$saveMultipleClass->falseQuestion3,$saveMultipleClass->falseQuestion4));
+            $saveMultipleClass->falseQuestion1,$saveMultipleClass->falseQuestion2,$saveMultipleClass->falseQuestion3,$saveMultipleClass->falseQuestion4,$saveMultipleClass->addimage()));
         if($insert){
             header('Location: index.php?radioValue='.$saveMultipleClass->examid);
         }
@@ -104,7 +120,7 @@ if(isset($_POST["saveQuestionMultiple"])){
 
 // Add True/False Question
 if(isset($_POST["addTrueFalse"])){
-    class saveTrueFalse{
+    class saveTrueFalse extends main {
         public $examid;
         public $question;
         public $trueAnswer;
@@ -118,11 +134,10 @@ if(isset($_POST["addTrueFalse"])){
 
     }
     $saveTrueFalseClass= new saveTrueFalse();
-    echo $saveTrueFalseClass->examid;
-    echo $saveTrueFalseClass->question;
-    echo $saveTrueFalseClass->trueAnswer;
-    try {
-        $insert=$trueFalseSql->execute(array($saveTrueFalseClass->examid,$saveTrueFalseClass->question,$saveTrueFalseClass->trueAnswer));
+
+
+   try {
+        $insert=$trueFalseSql->execute(array($saveTrueFalseClass->examid,$saveTrueFalseClass->question,$saveTrueFalseClass->trueAnswer,$saveTrueFalseClass->addimage()));
         if($insert){
             header('Location: index.php?radioValue='.$saveTrueFalseClass->examid);
         }
@@ -132,7 +147,7 @@ if(isset($_POST["addTrueFalse"])){
 
 }
 if(isset($_POST["addGapFilling"])){
-    class saveGapFilling{
+    class saveGapFilling extends main {
         public $examid;
         public $question;
         public $answer;
@@ -148,7 +163,7 @@ if(isset($_POST["addGapFilling"])){
     $saveGapFillingClass= new saveGapFilling();
 
     try {
-        $insert=$gapFillingSql->execute(array($saveGapFillingClass->examid,$saveGapFillingClass->question,$saveGapFillingClass->answer));
+        $insert=$gapFillingSql->execute(array($saveGapFillingClass->examid,$saveGapFillingClass->question,$saveGapFillingClass->answer,$saveGapFillingClass->addimage()));
         if($insert){
             header('Location: index.php?radioValue='.$saveGapFillingClass->examid);
         }
@@ -159,7 +174,7 @@ if(isset($_POST["addGapFilling"])){
 }
 // add Open Cloze
 if(isset($_POST["addOpenCloze"])){
-    class saveOpenCloze{
+    class saveOpenCloze extends main {
         public $examid;
         public $question;
 
@@ -175,7 +190,7 @@ if(isset($_POST["addOpenCloze"])){
     $saveOpenClozeClass= new saveOpenCloze();
 
     try {
-        $insert=$openClozeSql->execute(array($saveOpenClozeClass->examid,$saveOpenClozeClass->question));
+        $insert=$openClozeSql->execute(array($saveOpenClozeClass->examid,$saveOpenClozeClass->question,$saveOpenClozeClass->addimage()));
         if($insert){
             header('Location: index.php?radioValue='.$saveOpenClozeClass->examid);
         }
@@ -187,13 +202,23 @@ if(isset($_POST["addOpenCloze"])){
 
 //Remove Question
 if(isset($_POST["questionid"])){
-
+    $imgdstry =$conn->prepare("SELECT image FROM questionTable WHERE İndex=:id");
+    $imgdstry->execute(array(
+        "id"=>$_POST['questionid']
+    ));
+    $imgdstryid= $imgdstry->fetchAll();
+    unlink($imgdstryid[0]["image"]);
     $query =$conn->prepare("DELETE FROM questionTable WHERE İndex= :id");
     $delete=$query->execute(array(
         "id"=>$_POST['questionid']
     ));
 
+
+
 }
 
 
+
 ?>
+
+

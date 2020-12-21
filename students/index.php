@@ -9,7 +9,7 @@ if(isset($_POST["finishExam"])){
     unset($_SESSION['id']);
 }
 
-$date = date("'Y-m-d H:i:s'");
+$date = date("Y-m-d H:i:s");
 
 
 ?>
@@ -36,11 +36,11 @@ $date = date("'Y-m-d H:i:s'");
             $questionSql->execute();
             $questionSort = $questionSql->fetchAll();
             ?>
-            <div class="col-sm-4">
+        <?php if($row["activation"]): ?>
+            <div class="col-sm-4" >
                 <div class="card text-white bg-secondary mb-3" style="width: 100%;">
                     <div class="card-header"> <?php echo $row["examId"]."-".$row["examName"]?></div>
                     <div class="card-body">
-                        <h5 class="card-title">Secondary card title</h5>
                         <ul>
                             <li>
                                 Toplan sınav süresi <?php echo $row["maxTime"]?>
@@ -54,19 +54,26 @@ $date = date("'Y-m-d H:i:s'");
                             <li>
                                 Sınav  <?php echo $questionSort[0][0]?> sorudan mevcuttur
                             </li>
-                        </ul>
-                        <form action="questions.php" method="POST">
 
-                        </form>
-                        <button value="<?php echo $_SESSION["id"]= $row["examId"] ?> " name="examid" class="btn btn-success">Sınava Git</button>
+                        </ul>
+
+                        <?php if($row["startTime"]<$date and $date<$row["endTime"]): ?>
+                        <button value="<?php echo $_SESSION["id"]= $row["examId"] ?> "  name="examid" class="btn btn-success goExam">Sınava Git</button>
+                        <?php else:?>
+                            <button   name="examid" class="btn btn-danger " <?php echo ($row["startTime"]<$date and $date<$row["endTime"])?"":"disabled" ?> ><i class="fas fa-lock"></i></button>
+                        <?php endif;?>
                     </div>
                 </div>
             </div>
+        <?php endif;?>
+
         <?php  endforeach;?>
         <?php
         if(isset($_POST["finishExam"])){
             unset($_SESSION['id']);
             unset($_SESSION["question"]);
+            unset($_SESSION["quest"]);
+            unset($_SESSION["point"]);
         }
 
         ?>
@@ -82,9 +89,41 @@ $date = date("'Y-m-d H:i:s'");
 </html>
 <script>
 
-    $(".btn").click(function () {
+    $(".goExam").click(function () {
         var questionid = $(this).attr("value");
-        location.href = "questions.php?examid="+questionid;
+        $.ajax({
+            type:"POST",
+            url:"questionRandom.php",
+            data:'examid='+questionid,
+            success:function (msg){
+
+                location.href = "questions.php";
+
+
+            },
+            error:function (){
+                console.log("error");
+            }
+        });
+        $.ajax({
+            type:"POST",
+            url:"questions.php",
+            data:{'next':1},
+            success:function (msg){
+
+                console.log('%c success', 'background: black; color: green');
+
+
+
+            },
+            error:function (){
+
+                console.log('%c error', 'background: black; color: red');
+
+            }
+        });
 
     });
+
+
 </script>

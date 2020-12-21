@@ -28,8 +28,15 @@
                     </div>
 
                 </div>
-                <form method="POST"  action="process.php" class="form-group ">
-
+                <form method="POST"  action="process.php" class="form-group " enctype="multipart/form-data">
+                    <div class="row" style="background: whitesmoke;height: 80px;" >
+                        <div class="col-md-2">
+                            <label style="padding-top: 20px"  class="d-flex justify-content-end">Resim</label>
+                        </div>
+                        <div class="col-md-10">
+                            <input type="file" style="padding-top: 20px" name="file"  accept="image/png, image/jpeg" placeholder="Resim seçiniz">
+                        </div>
+                    </div>
                     <div  class="row" style="background-color:#0fe424;color:white;">
                         <div class="col-md-2">
                             <label class="d-flex justify-content-end">SORU </label>
