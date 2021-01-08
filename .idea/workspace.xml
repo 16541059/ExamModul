@@ -20,33 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="825abd15-4483-4329-976a-9ea18b19c06d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/teacher/answerManagement.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/teacher/image/5fedbd8036078.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/teacher/image/5fedbdd2a5190.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/teacher/management.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/teacher/studentPoint.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/teacher/stutakexam.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/students/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/students/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/students/process.php" beforeDir="false" afterPath="$PROJECT_DIR$/students/process.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/students/questionRandom.php" beforeDir="false" afterPath="$PROJECT_DIR$/students/questionRandom.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/students/questions.php" beforeDir="false" afterPath="$PROJECT_DIR$/students/questions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/addPdf.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/addPdf.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/gapFilling.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/gapFilling.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/image.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/pdfprocess.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/image/5fd8ac7b2dea8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/image/5fd8b0f6eeee1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/image/5fd8b707edb66.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/image/5fd8c235b032d.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/image/5fd8c43717abe.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/multipleChoice.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/multipleChoice.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/openCloze.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/openCloze.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/process.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/process.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/sorular.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/sorular.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/trueFalse.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/trueFalse.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,6 +173,7 @@
       <workItem from="1609830842400" duration="15650000" />
       <workItem from="1609919413738" duration="20583000" />
       <workItem from="1610005179945" duration="2248000" />
+      <workItem from="1610095070878" duration="1272000" />
     </task>
     <servers />
   </component>
