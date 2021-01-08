@@ -8,16 +8,15 @@ $questionSort= $_SESSION["quest"];
 
 if(isset($_POST["next"])){
 
-
         $_SESSION["question"]= $_SESSION["question"]+ $_POST["next"];
-
-
 
 }
 
+$time=$_SESSION["time"] ;
+$i= $_SESSION["question"]-1;
 
 
-echo $i= $_SESSION["question"]-1;
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -37,9 +36,13 @@ echo $i= $_SESSION["question"]-1;
 
 <div class="container mb-5">
     <div class="row">
+        <div class="col-md-11">
+
+
         <div class="card" style="width:98%">
             <div class="card-header">
                 Soru <?php echo $i+1?>
+
             </div>
             <div class="card-body" >
 
@@ -131,6 +134,16 @@ echo $i= $_SESSION["question"]-1;
             </div>
 
         </div>
+        </div>
+        <div class="col-md-1">
+            <input type="text" hidden name="examId" value="<?php echo $_SESSION["examid"]?>">
+
+            <input name="time" value="<?php echo  $time[0]["maxTime"] ?>" hidden placeholder="<?php echo  $time[0]["maxTime"] ?>">
+            <form name="counter">
+                <label style="color:white;"  for="chandresh">Kalan Süre</label>
+                <input type="text" readonly size="8" name="chandresh" id="counter">
+            </form>
+        </div>
     </div>
 </div>
 
@@ -148,24 +161,19 @@ echo $i= $_SESSION["question"]-1;
                 </ul>
             </nav>
         </div>
-        <div class="col-md-8"></div>
+        <div class="col-md-7"></div>
         <div class="col-md-2">
             <div class="">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination center">
                         <?php if($i <count($questionSort)):?>
-
-
-
                                 <li class="page-item" ><button id="nextButton" value="<?php echo $questionSort[$i]["index"]?>" class="page-link" type="submit"> Sonraki Soru <i class="fas fa-arrow-right "></i> </button></li>
-
                         <?php else:?>
                             <form action="index.php" method="POST">
                                 <li class="page-item" ><button name="finishExam"  class="page-link" type="submit"> Sınavı Bitir <i class="fas fa-arrow-right "></i> </button></li>
+
                             </form>
-
                         <?php endif; ?>
-
                     </ul>
                 </nav>
             </div>
@@ -173,8 +181,7 @@ echo $i= $_SESSION["question"]-1;
     </div>
 </div>
 
-<input type="text" hidden name="examId" value="<?php echo $_SESSION["examid"]?>">
-<input type="text" name="point" value="<?php echo  $_SESSION["point"]?>" hidden>
+
 </body>
 
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -184,6 +191,61 @@ echo $i= $_SESSION["question"]-1;
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="../jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
 <script>
+    console.log($("input[name='time']").val());
+    function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for(var i = 0; i <ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+    var cnt = $("input[name='time']").val();
+    function counter(){
+        if(getCookie("cnt") > 0){
+            cnt = getCookie("cnt");
+        }
+        cnt -= 1;
+        document.cookie = "cnt="+ cnt;
+        jQuery("#counter").val(getCookie("cnt")+" dk");
+
+
+        if(cnt>0){
+            setTimeout(counter,60000);
+        }
+        else{
+            document.cookie ="cnt="+0;
+            $("input[name='time']").val(0);
+            $.ajax({
+                type:"POST",
+                url:"index.php",
+                data:{'finishExam':1},
+                success:function (msg){
+
+                    console.log('%c success', 'background: black; color: green');
+                },
+                error:function (){
+
+                    console.log('%c error', 'background: black; color: red');
+                }
+            });
+
+
+        }
+
+    }
+
+    counter();
+
+
 
     /*    shuffleElements( $('.form-check') );
         function shuffleElements($elements) {
@@ -219,8 +281,6 @@ echo $i= $_SESSION["question"]-1;
         .change(function(){
             if( $(this).is(":checked") ){
                 var val = $(this).val();
-
-
             }
         });
 
@@ -231,12 +291,12 @@ echo $i= $_SESSION["question"]-1;
         var index= $("button[id='nextButton']").val();
         var gapValue= $("input[name='gapFilling']").val();
         var openValue= $("input[name='openCloze']").val();
-        var point=$("input[name='point']").val();
+
        if(radioValue){
            $.ajax({
                type:"POST",
                url:"process.php",
-               data:{'radioValue':radioValue,'examId':examId,'point':point,'index':index},
+               data:{'radioValue':radioValue,'examId':examId,'index':index},
                success:function (){
 
                    console.log('%c success', 'background: black; color: green');
@@ -256,7 +316,7 @@ echo $i= $_SESSION["question"]-1;
             $.ajax({
                 type:"POST",
                 url:"process.php",
-                data:{'gapValue':gapValue,'examId':examId,'point':point,'index':index},
+                data:{'gapValue':gapValue,'examId':examId,'index':index},
                 success:function (msg){
 
                     console.log('%c success', 'background: black; color: green');
@@ -272,7 +332,7 @@ echo $i= $_SESSION["question"]-1;
             $.ajax({
                 type:"POST",
                 url:"process.php",
-                data:{'openValue':openValue,'examId':examId,'point':point,'index':index},
+                data:{'openValue':openValue,'examId':examId,'index':index},
                 success:function (msg){
 
                     console.log('%c success', 'background: black; color: green');

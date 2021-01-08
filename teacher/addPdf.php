@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-<form method="POST" action="image.php" class="form-group " enctype="multipart/form-data">
+<form method="POST" action="pdfprocess.php" class="form-group " enctype="multipart/form-data">
     <input type="file" style="padding-top: 20px" name="file"  >
     <button type="submit"> gönder</button>
 </form>

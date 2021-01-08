@@ -1,6 +1,5 @@
 <?php include 'connect.php'?>
 <?php require '../vendor/autoload.php';?>
-
 <?php
 
 
@@ -8,24 +7,35 @@ $query = $conn->prepare("INSERT INTO examTable SET
 examId = ?,
 startTime= ?,
 endTime= ?,examName= ?,maxMark= ?,maxEntry= ?,maxTime= ?,activation= ?");
-
+$examUpdate = $conn->prepare("UPDATE  examTable SET
+startTime= ?,
+endTime= ?,examName= ?,maxMark= ?,maxEntry= ?,maxTime= ?,activation= ? WHERE examId = ?");
 $multipleSql = $conn->prepare("INSERT INTO questionTable SET examId=?, question= ?, 	trueQuestion= ?,
 falseQuestion1=? ,falseQuestion2= ?,falseQuestion3= ?,falseQuestion4= ?,image=? ");
 $trueFalseSql = $conn->prepare("INSERT INTO questionTable SET examId=?, question= ?, trueFalse=?,image=? ");
+$trueFalseUpdate=$conn->prepare("UPDATE questionTable SET question= ?, trueFalse=?,image=? WHERE examId=? ");
 $gapFillingSql = $conn->prepare("INSERT INTO questionTable SET examId=?, question= ?, answer=?,image=? ");
 $openClozeSql = $conn->prepare("INSERT INTO questionTable SET examId=?, question= ?,image=? ");
+$insetPointSql = $conn->prepare("INSERT INTO studentPoint SET examId=?, studentNo=?, studentName= ?,studentPoint=? ");
+
 
 ?>
 <?php
 
  class main{
+
      public function addimage(){
 
          @$tmp_name=$_FILES["file"]["tmp_name"];
          @$name=$_FILES["file"]["name"];
          $benzersizad=uniqid();
          (move_uploaded_file(@$tmp_name,"/var/www/html/php/teacher/image/" . $benzersizad.".png"));
-         return "../teacher/image/" . $benzersizad.".png";
+         if(!empty(@$name)){
+             return "../teacher/image/" . $benzersizad.".png";
+         }else{
+             return "";
+         }
+
 
      }
 
@@ -65,13 +75,34 @@ $ExamClass = new Exam();
         }
 
     }catch (Exception $e){
-        echo $e->getMessage();
+        if($e->getCode()==23000){
+            $update=$examUpdate->execute(array($ExamClass->examStartTime,$ExamClass->examEndTime,$ExamClass->examName,$ExamClass->examMark,
+                $ExamClass->examEntry,$ExamClass->examTime,$ExamClass->examStatus,$ExamClass->examCode));
+            if($update){
+                header('Location: index.php');
+            }
+        }
+
     }
 
 
 
 }
 if($_POST["id"]){
+    $delimg =$conn->prepare("SELECT image FROM questionTable WHERE examId=:id");
+    $delimg->execute(array(
+        "id"=>$_POST['id']
+    ));
+    $delimg= $delimg->fetchAll();
+    foreach ($delimg as $row){
+        unlink($row["image"]);
+    }
+
+
+    $question =$conn->prepare("DELETE FROM questionTable WHERE examId= :id");
+    $delete=$question->execute(array(
+        "id"=>$_POST['id']
+    ));
     $query =$conn->prepare("DELETE FROM examTable WHERE examId= :id");
     $delete=$query->execute(array(
         "id"=>$_POST['id']
@@ -141,6 +172,7 @@ if(isset($_POST["addTrueFalse"])){
         if($insert){
             header('Location: index.php?radioValue='.$saveTrueFalseClass->examid);
         }
+
     }catch (Exception $e){
         echo $e->getMessage();
     }
@@ -194,6 +226,9 @@ if(isset($_POST["addOpenCloze"])){
         if($insert){
             header('Location: index.php?radioValue='.$saveOpenClozeClass->examid);
         }
+        else{
+
+        }
     }catch (Exception $e){
         echo $e->getMessage();
     }
@@ -213,10 +248,21 @@ if(isset($_POST["questionid"])){
         "id"=>$_POST['questionid']
     ));
 
-
-
 }
 
+if(isset($_POST["no"])){
+    $no= $_POST["no"];
+    $name= $_POST["name"];
+    $point= $_POST["point"];
+    $examId= $_POST["pointExamId"];
+
+
+        $insert=$insetPointSql->execute(array($examId,$no,$name,$point));
+        if($insert){
+            echo "başarılı";
+
+        }
+}
 
 
 ?>

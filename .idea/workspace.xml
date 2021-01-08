@@ -20,26 +20,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="825abd15-4483-4329-976a-9ea18b19c06d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/students/process.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/students/questionRandom.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/teacher/image.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/teacher/image/5fd8ac7b2dea8.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/teacher/image/5fd8b0f6eeee1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/teacher/image/5fd8b707edb66.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/teacher/image/5fd8c235b032d.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/teacher/image/5fd8c43717abe.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/teacher/sorular.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/teacher/sorular.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teacher/answerManagement.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teacher/image/5fedbd8036078.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teacher/image/5fedbdd2a5190.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teacher/management.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teacher/studentPoint.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teacher/stutakexam.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/students/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/students/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/students/process.php" beforeDir="false" afterPath="$PROJECT_DIR$/students/process.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/students/questionRandom.php" beforeDir="false" afterPath="$PROJECT_DIR$/students/questionRandom.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/students/questions.php" beforeDir="false" afterPath="$PROJECT_DIR$/students/questions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/addPdf.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/addPdf.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/teacher/gapFilling.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/gapFilling.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/addPdf.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/image.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/pdfprocess.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/image/5fd8ac7b2dea8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/image/5fd8b0f6eeee1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/image/5fd8b707edb66.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/image/5fd8c235b032d.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/image/5fd8c43717abe.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/teacher/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/teacher/multipleChoice.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/multipleChoice.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/teacher/openCloze.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/openCloze.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/teacher/process.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/process.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/sorular.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/sorular.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/teacher/trueFalse.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/trueFalse.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -62,6 +68,14 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/composer" />
@@ -69,6 +83,9 @@
       <path value="$PROJECT_DIR$/vendor/respect/validation" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
     </include_path>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedIndex" value="1" />
   </component>
   <component name="ProjectId" id="1jn87eXssvBVnJziVc6rjOJr2kU" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -167,6 +184,20 @@
       <workItem from="1608275624194" duration="12296000" />
       <workItem from="1608381831868" duration="12000" />
       <workItem from="1608402835050" duration="2927000" />
+      <workItem from="1608538304386" duration="5657000" />
+      <workItem from="1608623769591" duration="597000" />
+      <workItem from="1608706732038" duration="2431000" />
+      <workItem from="1608793827492" duration="16465000" />
+      <workItem from="1608881436920" duration="15016000" />
+      <workItem from="1608999550531" duration="1000" />
+      <workItem from="1608999935154" duration="2236000" />
+      <workItem from="1609072070813" duration="4743000" />
+      <workItem from="1609313598115" duration="15205000" />
+      <workItem from="1609400158800" duration="8018000" />
+      <workItem from="1609744735918" duration="21577000" />
+      <workItem from="1609830842400" duration="15650000" />
+      <workItem from="1609919413738" duration="20583000" />
+      <workItem from="1610005179945" duration="2248000" />
     </task>
     <servers />
   </component>

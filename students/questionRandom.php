@@ -14,13 +14,11 @@ $questionSort = $questionSql->fetchAll();
 shuffle($questionSort);
 $_SESSION["quest"]=$questionSort;
 
-
-$examSql = $conn->prepare("SELECT * FROM examTable WHERE examId  = :examid  ");
-$examSql->bindParam(":examid",  $_SESSION["examid"] );
-$examSql->execute();
-$examSort = $examSql->fetchAll();
-$_SESSION["point"]= $examSort[0]["maxMark"]/count($questionSort);
-
+$examTime = $conn->prepare("SELECT maxTime FROM examTable WHERE examId  = :examid ");
+$examTime->bindParam(":examid",  $_SESSION["examid"] );
+$examTime->execute();
+$time = $examTime->fetchAll();
+$_SESSION["time"]=$time;
 
 ?>
 

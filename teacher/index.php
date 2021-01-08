@@ -27,10 +27,19 @@ $questionSort= $questionSql->fetchAll();
 <body>
     <div class="container">
 
-        <div class="row questionOptionBar">
+        <div class="row questionOptionBar mb-2">
 
-               <h6>SINAV ÖZELLİKLERİ</h6>
+               <h6> YÖNET</h6>
 
+
+        </div>
+        <div class=" row mb-2">
+            <div class=" col-md-3">
+                <a style="width:100% " class="btn btn-warning" href="management.php"> Cevapları  Gör </a>
+            </div>
+            <div class=" col-md-3">
+                <a style="width:100% " class="btn btn-warning" href="addPdf.php"> Text Dosyası Yükle </a>
+            </div>
         </div>
 
         <div class="row questionBar">
@@ -68,8 +77,8 @@ $questionSort= $questionSql->fetchAll();
                  <?php foreach ($examTable as $row ):?>
                     <tr id="exam-<?php echo $row["examId"] ?>">
 
-                        <td><input type="radio" id="radio"  name="examSelecet" value="<?php echo $row["examId"] ?>"  <?php if($_GET['radioValue'] == $row["examId"])  echo ' checked="checked"';?> ></td>
-                        <th scope="row"><?php echo $row["examId"]?> </th>
+                        <th><input type="radio" id="radio"  name="examSelecet" value="<?php echo $row["examId"] ?>"  <?php if($_GET['radioValue'] == $row["examId"])  echo ' checked="checked"';?> ></th>
+                        <td scope="row"><?php echo $row["examId"]?> </td>
                         <td><?php echo $row["startTime"]?></td>
                         <td><?php echo $row["endTime"]?></td>
                         <td><?php echo $row["examName"]?></td>
@@ -78,7 +87,7 @@ $questionSort= $questionSql->fetchAll();
                         <td><?php echo $row["maxTime"]?></td>
                         <td><?php echo $row["activation"] ?  "Aktif":"Pasif"; ?></td>
                         <td>
-                            <button id="editExam" type="submit" class="btn btn-success"><i class="fas fa-bars"></i></button>
+                            <button id="editExam" name="<?php echo $row["examId"]?>" type="submit" class="btn btn-success editExam"><i class="fas fa-bars"></i></button>
                             <button  id="<?php echo $row["examId"] ?>" type="submit" class="btn btn-danger far fa-trash-alt deleteExam "></button>
                         </td>
                     </tr>
@@ -110,8 +119,8 @@ $questionSort= $questionSql->fetchAll();
                         <div id="card-<?php echo $i?>"  class="card-header">
                             Soru <?php echo $i;?> <span id="<?php echo $i?>" class="badge badge-info slidequestion"> <i id="angle-up-<?php echo $i?>" class="fas fa-angle-down"></i></span>
                             <div class="col-md-2 float-right">
-                                <button card-header type="submit" class="btn btn-success  fas fa-bars"></button>
-                                <button id="<?php echo $row["index"];?>"  card-header style="margin-left: 1em"  type="submit" class="btn btn-danger far fa-trash-alt deletequestion "></button>
+                                <button id="<?php echo $row["index"]?>"  type="submit" class="btn btn-success  fas fa-bars"></button>
+                                <button id="<?php echo $row["index"];?>"   style="margin-left: 1em"  type="submit" class="btn btn-danger far fa-trash-alt deletequestion "></button>
                             </div>
 
                         </div>
@@ -307,7 +316,7 @@ $questionSort= $questionSql->fetchAll();
                         <label for="examIdInput">Sınav Süresi</label>
                         <div class="input-container">
                             <i class="fas fa-stopwatch icon"></i>
-                            <input type="time"  class="form-control input-field" name="examTime" aria-describedby="inputHelp" >
+                            <input type="number"  class="form-control input-field" name="examTime" aria-describedby="inputHelp" >
 
                         </div>
                     </div>
@@ -347,9 +356,25 @@ $questionSort= $questionSql->fetchAll();
 <script src="../air-datepicker-master/dist/js/i18n/datepicker.tr.js"></script>
 
 <script src="index.js"></script>
+
+<script>
+    $(".editExam").click(function () {
+       let id= $(this).attr("name");
+       let tdr= $('#exam-'+id).find("td").each(function () {
+                  return $(this).text();
+
+       });
+
+       $("input[name='examCode']").val(tdr[0]["textContent"]);
+       $("input[name='examStartTime']").val(tdr[1]["textContent"]);
+       $("input[name='examEndTime']").val(tdr[2]["textContent"]);
+       $("input[name='examName']").val(tdr[3]["textContent"]);
+       $("input[name='examMark']").val(tdr[4]["textContent"]);
+       $("input[name='examEntry']").val(tdr[5]["textContent"]);
+       $("input[name='examTime']").val(tdr[6]["textContent"]);
+       $("#examAddModal").trigger("click");
+    });
+</script>
 </html>
-<?php
-function base_url() {
-    return 'http://localhost';
-}
+
 

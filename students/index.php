@@ -73,7 +73,8 @@ $date = date("Y-m-d H:i:s");
             unset($_SESSION['id']);
             unset($_SESSION["question"]);
             unset($_SESSION["quest"]);
-            unset($_SESSION["point"]);
+            unset($_COOKIE["cnt"]);
+
         }
 
         ?>

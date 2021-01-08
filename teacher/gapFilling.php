@@ -83,6 +83,17 @@
         </div>
     </div>
 </div>
+<div id="questionModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content" style="background-color: silver">
+        <span class="close">&times;</span>
+        <p class="A"></p>
+        <div class="d-flex justify-content-end" style="margin-top: 10px">
+
+        </div>
+    </div>
+</div>
 </body>
 
 
@@ -102,4 +113,41 @@
     CKEDITOR.config.defaultLanguage = 'tr';
     question.config.uiColor="#0fe424";
     CKEDITOR.config.autoParagraph = false;
+
+    var modal=$("#questionModal");
+    var btn=$("#previewBtn");
+    var close=$(".close");
+
+    btn.click(function (e) {
+        //modal.css("display","block");
+        e.preventDefault();
+
+        $(".A").html("<p>"+"Soru: "+CKEDITOR.instances['question'].getData()+"</p>"+
+            "<p>"+ "Cevap: " +"<input type='text' class='form-control' /> " +"</p>");
+        modal.show( "fast" );
+
+    });
+    close.click(function (){
+
+        //    modal.css("display","none");
+        modal.hide( "fast" );
+
+
+    });
+    $(window).click(function (e){
+
+        if (e.target == modal[0]) {
+            //   modal.css("display","none");
+            modal.hide( "fast" );
+        }
+    });
+
+    $("#recantBtn").click(function () {
+        let data ="";
+
+        CKEDITOR.instances['question'].getData(data);
+        CKEDITOR.instances['answer'].setData(data);
+        $(location).attr('href', '/php/teacher/index.php');
+    });
+
 </script>

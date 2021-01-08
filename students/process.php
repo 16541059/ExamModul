@@ -2,27 +2,34 @@
  <?php
 $query = $conn->prepare("INSERT INTO answerTable SET
 studentNo = ?,
+studentName=?,
 examId= ?,
-questionIndex= ?,studentAnswer= ?,point= ?");
+questionIndex= ?,studentAnswer= ?");
 ?>
 
 <?php
+$name="Ali Yıldırım";
+$no=16541056;
 if(isset($_POST["radioValue"])){
 
     class addMultiple{
         public $studentNo;
+        public  $studentName;
         public $examId;
         public $questionIndex;
         public $studentAnswer;
-        public $point;
+
 
         public function __construct()
         {
-            $this->studentNo=16541059;
+         global $no;
+         global $name;
+            $this->studentNo= $no;
+            $this->studentName=$name;
             $this->examId=$_POST["examId"];
             $this->questionIndex=$_POST["index"];
             $this->studentAnswer = $_POST["radioValue"];
-            $this->point=$_POST["point"];
+
 
 
         }
@@ -32,8 +39,8 @@ if(isset($_POST["radioValue"])){
 
 
     try {
-        $insert=$query->execute(array($addMultiple->studentNo,$addMultiple->examId,$addMultiple->questionIndex,
-            $addMultiple->studentAnswer,$addMultiple->point));
+        $insert=$query->execute(array($addMultiple->studentNo,$addMultiple->studentName,$addMultiple->examId,$addMultiple->questionIndex,
+            $addMultiple->studentAnswer));
 
     }catch (Exception $e){
         echo $e->getMessage();
@@ -43,20 +50,60 @@ if(isset($_POST["radioValue"])){
 // Add Gapfilling
 if(isset($_POST["openValue"])){
 
- class addGap{
+ class openValue{
   public $studentNo;
+  public  $studentName;
   public $examId;
   public $questionIndex;
   public $studentAnswer;
-  public $point;
 
   public function __construct()
   {
-   $this->studentNo=16541059;
+   global $no;
+   global $name;
+   $this->studentNo=$no;
+   $this->studentName=$name;
    $this->examId=$_POST["examId"];
    $this->questionIndex=$_POST["index"];
    $this->studentAnswer = $_POST["openValue"];
-   $this->point=$_POST["point"];
+
+
+
+  }
+ }
+
+ $addGap = new openValue();
+
+ echo $addGap->examId;
+
+ try {
+  $insert=$query->execute(array($addGap->studentNo,$addGap->studentName,$addGap->examId,$addGap->questionIndex,
+      $addGap->studentAnswer));
+
+ }catch (Exception $e){
+  echo $e->getMessage();
+ }
+
+}
+if(isset($_POST["gapValue"])){
+
+ class addGap{
+  public $studentNo;
+  public  $studentName;
+  public $examId;
+  public $questionIndex;
+  public $studentAnswer;
+
+  public function __construct()
+  {
+   global $no;
+   global $name;
+   $this->studentNo=$no;
+   $this->studentName=$name;
+   $this->examId=$_POST["examId"];
+   $this->questionIndex=$_POST["index"];
+   $this->studentAnswer = $_POST["gapValue"];
+
 
 
   }
@@ -67,8 +114,8 @@ if(isset($_POST["openValue"])){
  echo $addGap->examId;
 
  try {
-  $insert=$query->execute(array($addGap->studentNo,$addGap->examId,$addGap->questionIndex,
-      $addGap->studentAnswer,$addGap->point));
+  $insert=$query->execute(array($addGap->studentNo,$addGap->studentName,$addGap->examId,$addGap->questionIndex,
+      $addGap->studentAnswer));
 
  }catch (Exception $e){
   echo $e->getMessage();

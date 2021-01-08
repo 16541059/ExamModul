@@ -41,7 +41,7 @@
                                 <label class="d-flex justify-content-end">SORU</label>
                             </div>
                             <div class="col-md-10">
-                             <textarea class="form-control" name="question"></textarea>
+                             <textarea id="question" class="form-control" name="question"></textarea>
                             </div>
                         </div>
                         <div class="row" style="background-color:#0FE424;color:white;">
@@ -86,7 +86,7 @@
                         </div>
                         <div class="row" style="margin-top: 8px;">
                             <div class="col-md-3">
-                                <button id="previewBtn" type="button" class="d-flex justify-content-start btn btn-primary"><i class="fas fa-eye"></i> SORU ÖNİZLEME</button>
+                                <button id="previewBtn" type="button"  class="d-flex justify-content-start btn btn-primary"><i  class="fas fa-eye"></i> SORU ÖNİZLEME</button>
                             </div>
                             <div class="col-md-2">
 
@@ -102,7 +102,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="d-flex justify-content-end" style="margin-left: 5px">
-                                    <button id="recantBtn" type="reset" class="btn btn-danger"><i class="fas fa-window-close"></i> VAZGEÇ</button>
+                                    <button id="recantBtn" type="reset"  class="btn btn-danger"><i class="fas fa-window-close"></i> VAZGEÇ</button>
                                     <button id="saveBtn" name="saveQuestionMultiple" type="submit" class=" btn btn-success ">  <i class="fas fa-plus"></i> KAYDET</button>
                                 </div>
 
@@ -115,6 +115,17 @@
         </div>
 
     </div>
+    <div id="questionModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content" style="background-color: silver">
+            <span class="close">&times;</span>
+            <p class="A"></p>
+            <div class="d-flex justify-content-end" style="margin-top: 10px">
+
+            </div>
+        </div>
+    </div>
 
 </body>
 
@@ -126,6 +137,7 @@
 <!--<script src="https://cdn.ckeditor.com/4.15.0/standard/ckeditor.js"></script>-->
 <script src="../jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
 <script src="../ckeditor/ckeditor.js"></script>
+
 
 <script>
 
@@ -147,13 +159,58 @@
    CKEDITOR.config.autoParagraph = false;
 
 
-    $("#previewBtn").click(function (){
-      var question=  $("textarea[name=question]").val();
-    });
+  /*  $("textarea[name=question]").change(function () {
+        let question=  $("textarea[name=question]").val();
+        let A=  $("textarea[name=trueQuestion]").val();
+        let B=  $("textarea[name=falseQuestion1]").val();
+        let C=  $("textarea[name=falseQuestion2]").val();
+        let D=  $("textarea[name=falseQuestion3]").val();
+        let E=  $("textarea[name=falseQuestion4]").val();
+        $(".A").text(A);
+        console.log(A);
+    });*/
+   var desc = CKEDITOR.instances['question'].getData();
+   var modal=$("#questionModal");
+   var btn=$("#previewBtn");
+   var close=$(".close");
 
+   btn.click(function () {
+       //modal.css("display","block");
 
+       $(".A").html("<p>"+"Soru: "+CKEDITOR.instances['question'].getData()+"</p>"+
+           "<p>"+  "<input type='radio' name='radio'/> " + "A) "+CKEDITOR.instances['trueQuestion'].getData()+"</p>"+
+           "<p>"+"<input type='radio' name='radio'/> " +"B) "+CKEDITOR.instances['falseQuestion1'].getData()+"</p>"+
+           "<p>"+"<input type='radio' name='radio'/> " +"C) "+CKEDITOR.instances['falseQuestion2'].getData()+"</p>"+
+           "<p>"+"<input type='radio' name='radio'/> " +"D) "+CKEDITOR.instances['falseQuestion3'].getData()+"</p>"+
+           "<p>"+"<input type='radio' name='radio'/> " +"E) "+CKEDITOR.instances['falseQuestion4'].getData()+"</p>"
 
+       );
+       modal.show( "fast" );
+   });
+   close.click(function (){
 
+       //    modal.css("display","none");
+       modal.hide( "fast" );
+   });
+   $(window).click(function (e){
+
+       if (e.target == modal[0]) {
+           //   modal.css("display","none");
+           modal.hide( "fast" );
+       }
+   });
+
+   $("#recantBtn").click(function () {
+       let data ="";
+
+       CKEDITOR.instances['question'].getData(data);
+       CKEDITOR.instances['trueQuestion'].setData(data);
+       CKEDITOR.instances['falseQuestion1'].setData(data);
+       CKEDITOR.instances['falseQuestion2'].setData(data);
+       CKEDITOR.instances['falseQuestion3'].setData(data);
+       CKEDITOR.instances['falseQuestion4'].setData(data);
+       $(location).attr('href', '/php/teacher/index.php');
+   });
 
 </script>
 

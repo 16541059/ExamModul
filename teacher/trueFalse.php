@@ -77,7 +77,7 @@
                         <div class="col-md-3">
                             <div class="d-flex justify-content-end" style="margin-left: 5px">
                                 <button id="recantBtn" type="reset" class="btn btn-danger"><i class="fas fa-window-close"></i> VAZGEÇ</button>
-                                <button id="saveBtn" name="addTrueFalse" class=" btn btn-success ">  <i class="fas fa-plus"></i> KAYDET</button>
+                                <button id="saveBtn" type="submit" name="addTrueFalse" class=" btn btn-success ">  <i class="fas fa-plus"></i> KAYDET</button>
                             </div>
 
                         </div>
@@ -85,6 +85,18 @@
                     </div>
                 </form>
             </div>
+        </div>
+    </div>
+</div>
+
+<div id="questionModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content" style="background-color: silver">
+        <span class="close">&times;</span>
+        <p class="A"></p>
+        <div class="d-flex justify-content-end" style="margin-top: 10px">
+
         </div>
     </div>
 </div>
@@ -108,6 +120,37 @@
     question.config.uiColor="#0fe424"
     CKEDITOR.config.autoParagraph = false;
 
+    var modal=$("#questionModal");
+    var btn=$("#previewBtn");
+    var close=$(".close");
+
+    btn.click(function (e) {
+        //modal.css("display","block");
+        e.preventDefault();
+
+        $(".A").html("<p>"+"Soru: "+CKEDITOR.instances['question'].getData()+"</p>"+
+         "<input type='radio' name='radio'/> "+"Doğru"+"<br>"+
+         "<input type='radio' name='radio'/> "+"Yanlış"
+        );
+        modal.show( "fast" );
+
+    });
+    close.click(function (){
+
+        //    modal.css("display","none");
+        modal.hide( "fast" );
+
+
+    });
+    $(window).click(function (e){
+
+        if (e.target == modal[0]) {
+            //   modal.css("display","none");
+            modal.hide( "fast" );
+        }
+    });
+
+
     $('#selected').on('change', function() {
 
      var selectValue=  this.value;
@@ -123,6 +166,13 @@
         default:
             $("#selectdiv").css("background-color", "darkblue");
     }
+    });
+
+    $("#recantBtn").click(function () {
+        let data ="";
+
+        CKEDITOR.instances['question'].getData(data);
+        $(location).attr('href', '/php/teacher/index.php');
     });
 </script>
 <style>
